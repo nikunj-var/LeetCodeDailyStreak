@@ -1,0 +1,26 @@
+class Solution {
+public:
+    void dfs(TreeNode* t,vector<int>& v){
+        if(!t){
+            return;
+        }
+        dfs(t->left,v);
+        if(!t->left && !t->right){
+            v.push_back(t->val);
+        }
+        dfs(t->right,v);
+    }
+    bool leafSimilar(TreeNode* root1, TreeNode* root2) {
+        vector<int> t1,t2;
+        dfs(root1,t1);
+        dfs(root2,t2);
+        if(t1.size() != t2.size()){
+            return false;
+        }
+        for(int i=0;i<t1.size();i++){
+            if(t1[i] != t2[i])
+                return false;
+        }
+        return true;
+    }
+};
