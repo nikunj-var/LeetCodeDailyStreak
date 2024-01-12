@@ -1,0 +1,30 @@
+https://leetcode.com/problems/determine-if-string-halves-are-alike/description/?envType=daily-question&envId=2024-01-12
+
+class Solution {
+public:
+    bool halvesAreAlike(string s) {
+        int i=0;
+        unordered_map<char,int> m;
+        m['a']++;
+         m['e']++;
+          m['i']++;
+           m['o']++;
+            m['u']++;
+             m['A']++;
+              m['E']++;
+               m['I']++;
+                m['O']++;
+                 m['U']++;
+
+        int avowels=0,bvowels=0;
+        for(;i<s.length()/2;i++){
+            if(m[s[i]])
+                avowels++;
+        }
+        for(;i<s.length();i++){
+            if(m[s[i]])
+                bvowels++;
+        }
+        return avowels==bvowels;
+    }
+};
