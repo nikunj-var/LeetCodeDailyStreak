@@ -1,0 +1,26 @@
+https://leetcode.com/problems/minimum-falling-path-sum/description/?envType=daily-question&envId=2024-01-19
+
+class Solution {
+public:
+    int minFallingPathSum(vector<vector<int>>& matrix) {
+        int row = matrix.size();
+        int col = matrix[0].size();
+        int ans = INT_MAX;
+        for(int i=1;i<row;i++){
+            for(int j=0;j<col;j++){
+                int temp = matrix[i-1][j];
+                if(j > 0){
+                    temp = min(temp,matrix[i-1][j-1]);
+                }
+                if(j < col-1){
+                    temp = min(temp,matrix[i-1][j+1]);
+                }
+                matrix[i][j] += temp;
+            }
+        }
+        for(int j=0;j<col;j++){
+            ans = min(ans,matrix[row-1][j]);
+        }
+        return ans;
+    }
+};
