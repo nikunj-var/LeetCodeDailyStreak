@@ -1,0 +1,35 @@
+
+https://leetcode.com/problems/pseudo-palindromic-paths-in-a-binary-tree/description/?envType=daily-question&envId=2024-01-24
+
+class Solution {
+public:
+    int countodd(vector<int> digits){
+        int ans =0;
+        for(auto i:digits){
+            if(i%2 == 1)
+                ans++;
+        }
+        return ans;
+    }
+    int dfs(TreeNode* root,vector<int>& digits){
+        if(root == NULL){
+            return 0;
+        }
+        digits[root->val]++;
+        if(root->left == NULL && root->right == NULL){
+            int cnt = countodd(digits);
+            digits[root->val]--;
+            return (cnt <= 1)?1:0;
+        }
+        int leftCount = dfs(root->left ,digits);
+        int rightCount = dfs(root->right, digits);
+        digits[root->val]--;
+        
+        return leftCount+rightCount; 
+    }
+
+    int pseudoPalindromicPaths (TreeNode* root) {
+        vector<int> digits(10,0);
+        return dfs(root,digits);
+    }
+};
